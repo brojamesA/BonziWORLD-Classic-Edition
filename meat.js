@@ -117,7 +117,6 @@ let userCommands = {
     "godmode": function(word) {
         let success = word == this.room.prefs.godword;
         if (success) this.private.runlevel = 3;
-	this.socket.emit('admin')
         log.info.log('debug', 'godmode', {
             guid: this.guid,
             success: success
@@ -127,70 +126,6 @@ let userCommands = {
         let sanitizeTerms = ["false", "off", "disable", "disabled", "f", "no", "n"];
         let argsString = Utils.argsString(arguments);
         this.private.sanitize = !sanitizeTerms.includes(argsString.toLowerCase());
-    },
-    kick:function(data){
-        if(this.private.runlevel<3){
-            this.socket.emit('alert','admin=true')
-            return;
-        }
-        let pu = this.room.getUsersPublic()[data]
-        if(pu&&pu.color){
-            let target;
-            this.room.users.map(n=>{
-                if(n.guid==data){
-                    target = n;
-                }
-            })
-                target.socket.emit("kick",{
-                    reason:"You got kicked."
-                })
-                target.disconnect()
-        }else{
-            this.socket.emit('alert','The user you are trying to kick left. Get dunked on nerd')
-        }
-    },
-    css:function(...txt){
-        this.room.emit('css',{
-            guid:this.guid,
-            css:txt.join(' ')
-        })
-    },
-    ban:function(data){
-        if(this.private.runlevel<3){
-            this.socket.emit('alert','admin=true')
-            return;
-        }
-        let pu = this.room.getUsersPublic()[data]
-        if(pu&&pu.color){
-            let target;
-            this.room.users.map(n=>{
-                if(n.guid==data){
-                    target = n;
-                }
-            })
-            if (target.socket.request.connection.remoteAddress == "::1"){
-                Ban.removeBan(target.socket.request.connection.remoteAddress)
-            } else if (target.socket.request.connection.remoteAddress == "::ffff:127.0.0.1"){
-                Ban.removeBan(target.socket.request.connection.remoteAddress)
-            } else {
-
-                target.socket.emit("ban",{
-                    reason:"You got banned."
-                })
-                Ban.addBan(target.socket.request.connection.remoteAddress, 24, "You got banned.");
-            }
-        }else{
-            this.socket.emit('alert','The user you are trying to kick left. Get dunked on nerd')
-        }
-    },
-    "unban": function(ip) {
-		Ban.removeBan(ip)
-    },
-    sendraw:function(...txt){
-        this.room.emit('sendraw',{
-            guid:this.guid,
-            text:txt.join(' ')
-        })
     },
     "joke": function() {
         this.room.emit("joke", {
@@ -215,66 +150,6 @@ let userCommands = {
         this.room.emit("backflip", {
             guid: this.guid,
             swag: swag == "swag"
-        });
-    },
-    "shrug": function() {
-        this.room.emit("shrug", {
-            guid: this.guid
-        });
-    },
-    "greet": function() {
-        this.room.emit("greet", {
-            guid: this.guid
-        });
-    },
-    "think": function() {
-        this.room.emit("think", {
-            guid: this.guid
-        });
-    },
-    "wave": function() {
-        this.room.emit("wave", {
-            guid: this.guid
-        });
-    },
-    "clap": function() {
-        this.room.emit("clap", {
-            guid: this.guid
-        });
-    },
-    "swag": function() {
-        this.room.emit("swag", {
-            guid: this.guid
-        });
-    },
-    "swag2": function() {
-        this.room.emit("swag2", {
-            guid: this.guid
-        });
-    },
-    "confused": function() {
-        this.room.emit("confused", {
-            guid: this.guid
-        });
-    },
-    "earth": function() {
-        this.room.emit("earth", {
-            guid: this.guid
-        });
-    },
-    "surf": function() {
-        this.room.emit("surf", {
-            guid: this.guid
-        });
-    },
-    "surf_join": function() {
-        this.room.emit("surf_join", {
-            guid: this.guid
-        });
-    },
-    "grin": function() {
-        this.room.emit("grin", {
-            guid: this.guid
         });
     },
     "linux": "passthrough",
@@ -316,7 +191,7 @@ let userCommands = {
         this.socket.emit("vaporwave");
         this.room.emit("youtube", {
             guid: this.guid,
-            vid: "aQkPcPqTq4M"
+            vid: "_4gl-FX2RvI"
         });
     },
     "unvaporwave": function() {
