@@ -101,19 +101,14 @@ input[type="text"] {
   border: 1px inset #AAA;
   color: #000; }
 
-.xp_bubble, .bubble {
+.xp_bubble, .bubble, .bubble_rev {
   background: #ffffe1;
   color: #000;
   -webkit-border-radius: 9px;
   -moz-border-radius: 9px;
   border-radius: 9px;
   border: #000000 solid 1px; }
-.bubble-autowidth { 
-	width: 505px; 
-	height: 290px; 
-	overflow-x: visible;
-	overflow-y: visible;
-}
+
 @font-face {
   font-family: 'Tahoma';
   src: url("../font/Tahoma/Tahoma.eot?#iefix") format("embedded-opentype"), url("../font/Tahoma/Tahoma.woff") format("woff"), url("../font/Tahoma/Tahoma.ttf") format("truetype"), url("../font/Tahoma/Tahoma.svg#Tahoma") format("svg");
@@ -123,10 +118,6 @@ input[type="text"] {
   width: 100%;
   height: 100%;
   position: absolute;
-  pointer-events: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
   top: 0;
   left: 0; }
 
@@ -140,17 +131,17 @@ input[type="text"] {
 .bonzi > canvas, .bonzi_placeholder {
   position: absolute; }
 
-.bubble-content {
+.bubble, .bubble_rev {
+  position: absolute;
+  width: 170px;
   padding: 12px;
-  max-height: 175px;
+  top: 55px;
   user-select: text;
   -webkit-user-select: text;
-  overflow-x: hidden;
-  overflow-y: auto;
   font-size: 14px;
   font-smooth: never;
   -webkit-font-smoothing: none;
-  position: relative;
+  position: absolute;
   overflow-wrap: break-word;
   word-wrap: break-word;
   -ms-word-break: break-all;
@@ -159,51 +150,41 @@ input[type="text"] {
   -moz-hyphens: auto;
   -webkit-hyphens: auto;
   hyphens: auto; }
+  .bubble:after, .bubble:before, .bubble_rev:after, .bubble_rev:before {
+    content: '';
+    position: absolute;
+    border-style: solid;
+    border-width: 4px 12px 4px 0;
+    display: block;
+    width: 0;
+    top: 9px; }
+  .bubble:after, .bubble_rev:after {
+    border-color: transparent #ffffe1;
+    z-index: 1; }
+  .bubble:before, .bubble_rev:before {
+    border-color: transparent #000000;
+    z-index: 0; }
 
 .bubble {
-  padding: 0px;
-  width: 197px;
-  position: absolute; }
-  .bubble::after {
-    content: '';
-    position: absolute; }
+  left: 180px; }
+  .bubble:after, .bubble:before {
+    border-width: 4px 12px 4px 0; }
+  .bubble:after {
+    left: -12px; }
+  .bubble:before {
+    left: -13px; }
 
-.bubble-left {
-  right: -45px;
-  top: 40px; }
-  .bubble-left::after {
-    background-image: url("../img/bonzi/bubble_tail_l.png");
-    width: 22px;
-    height: 14px;
-    top: 12px;
-    right: -22px; }
+.bubble_rev {
+  right: -20px; }
+  .bubble_rev:after, .bubble_rev:before {
+    border-width: 4px 0 4px 12px; }
+  .bubble_rev:after {
+    right: -12px; }
+  .bubble_rev:before {
+    right: -13px; }
 
-.bubble-right {
-  top: 40px;
-  left: 155px; }
-  .bubble-right::after {
-    background-image: url("../img/bonzi/bubble_tail_r.png");
-    width: 22px;
-    height: 14px;
-    top: 12px;
-    left: -22px; }
-
-.bubble-bottom {
-  top: 156px; }
-  .bubble-bottom::after {
-    background-image: url("../img/bonzi/bubble_tail_b.png");
-    width: 28px;
-    height: 22px;
-    top: -22px;
-    left: 26px; }
-
-.bubble-top {
-  bottom: 4px; }
-  .bubble-top::after {
-    background-image: url("../img/bonzi/bubble_tail_t.png");
-    width: 28px;
-    height: 22px;
-    left: 110px; }
+.bubble_autowidth {
+  width: auto !important; }
 
 .bonzi_name {
   border-style: solid;
@@ -233,17 +214,6 @@ body.vaporwave #chat_bar {
   background-image: url("../img/desktop.vaporwave/taskbar.png");
   background-size: 100% 100%;
   z-index: 999; }
-body.vaporwave #chat_tray {
-  background-image: url("../img/desktop.vaporwave/notif_left.png"), url("../img/desktop.vaporwave/notif_right.png"), url("../img/desktop.vaporwave/notif.png");
-  background-repeat: no-repeat;
-  background-position: left, right, left;
-  background-size: 5px 28px, 3px 28px, 100% 100%;
-  vertical-align: middle;
-  padding-left: 7px;
-  padding-top: 3px;
-  width: 22px; }
-body.vaporwave #btn_tile {
-  background-image: url("../img/desktop.vaporwave/tile.png"); }
 body.vaporwave #chat_send {
   width: 58px;
   background-image: url("../img/desktop.vaporwave/start.png");
@@ -280,22 +250,11 @@ body.vaporwave #chat_send {
   background-size: 100% 100%;
   z-index: 999; }
 
-#chat_tray {
-  background-image: url("../img/desktop/notif_left.png"), url("../img/desktop/notif.png");
-  background-repeat: no-repeat;
-  background-position: left;
-  background-size: 5px 30px, 100% 100%;
-  vertical-align: middle;
-  padding-left: 7px;
-  padding-top: 3px;
-  width: 22px; }
-
 .chat_bar_top {
   top: 0; }
 
 #chat_send {
   width: 100px;
-  user-select: none;
   background-image: url("../img/desktop/start.png");
   background-size: 100%;
   background-repeat: no-repeat;
@@ -330,15 +289,6 @@ body.vaporwave #chat_send {
   right: 0;
   user-select: text;
   -webkit-user-select: text; }
-
-.tray_btn {
-  width: 16px;
-  height: 16px;
-  display: inline-block;
-  margin: 2px 0px; }
-
-#btn_tile {
-  background-image: url("../img/desktop/tile.png"); }
 
 #page_login {
   background-color: #8b5adc;
@@ -500,7 +450,7 @@ body.vaporwave #chat_send {
  *
  * Version: v@VERSION
  *
- * Authors: Björn Brala (SWIS.nl), Rodney Rehm, Addy Osmani (patches for FF)
+ * Authors: Bj├╢rn Brala (SWIS.nl), Rodney Rehm, Addy Osmani (patches for FF)
  * Web: http://swisnl.github.io/jQuery-contextMenu/
  *
  * Copyright (c) 2011-@YEAR SWIS BV and contributors
