@@ -35,7 +35,7 @@
 				"sanitize": 3,
 				"pope": 3
 			},
-			"room_max": 8,
+			"room_max": 10000,
 			"owner": null,
 			"pitch": {
 				"max": 125,
@@ -84,7 +84,7 @@
 				"sanitize": 3,
 				"pope": 3
 			},
-			"room_max": 30,
+			"room_max": 10000,
 			"owner": null,
 			"pitch": {
 				"max": 125,
