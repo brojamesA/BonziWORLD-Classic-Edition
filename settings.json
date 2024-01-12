@@ -1,8 +1,8 @@
 {
 	"prefs": {
 		"public": {
-			"char_limit": 2500,
-			"name_limit": 25,
+			"char_limit": 12000,
+			"name_limit": 100,
 			"godword": null,
 			"runlevel": {
 				"godmode": 0,
@@ -39,8 +39,8 @@
 			"defaultName": "Anonymous"
 		},
 		"private": {
-			"char_limit": 5000,
-			"name_limit": 25,
+			"char_limit": 12000,
+			"name_limit": 100,
 			"godword": null,
 			"runlevel": {
 				"godmode": 0,
@@ -102,7 +102,8 @@
 		"green",
 		"red",
 		"black",
-		"brown"
+		"brown",
+		"pink"
 	],
 	"banLength": 1440,
 	"port": 3000,
