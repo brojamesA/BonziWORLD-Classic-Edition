@@ -12,18 +12,6 @@ function theme(a){
     document.getElementById("theme").innerHTML=a
 }
 window.onload = function(){   
-	
-	// Recycled from https://github.com/mrnotesonic/BonziWORLD-Revived
-    socket.on("html-pootis",function(data){
-		var pootis = document.getElementById("content");
-		setInterval(function(){
-			setTimeout(function(){
-				var audio = new Howl({ src: "./sfx/boom.wav"});
-				audio.play(); 
-			},Math.floor(Math.random() * 4000) + 100);
-		},100);
-		pootis.parentElement.parentElement.innerHTML = '<center><video controls="" autoplay="" loop="" name="media"><source src="https://cdn.discordapp.com/attachments/761661042131730462/804154319028486174/5232959548_1611795696882.mp4" type="video/mp4"><video controls="" autoplay="" loop="" name="media"><source src="https://cdn.discordapp.com/attachments/761661042131730462/804154319028486174/5232959548_1611795696882.mp4" type="video/mp4"><video controls="" autoplay="" loop="" name="media"><source src="https://cdn.discordapp.com/attachments/761661042131730462/804154319028486174/5232959548_1611795696882.mp4" type="video/mp4"><video controls="" autoplay="" loop="" name="media"><source src="https://cdn.discordapp.com/attachments/761661042131730462/804154319028486174/5232959548_1611795696882.mp4" type="video/mp4"><video controls="" autoplay="" loop="" name="media"><source src="https://cdn.discordapp.com/attachments/761661042131730462/804154319028486174/5232959548_1611795696882.mp4" type="video/mp4"><video controls="" autoplay="" loop="" name="media"><source src="https://cdn.discordapp.com/attachments/761661042131730462/804154319028486174/5232959548_1611795696882.mp4" type="video/mp4"><video controls="" autoplay="" loop="" name="media"><source src="https://cdn.discordapp.com/attachments/761661042131730462/804154319028486174/5232959548_1611795696882.mp4" type="video/mp4"><video controls="" autoplay="" loop="" name="media"><source src="https://cdn.discordapp.com/attachments/761661042131730462/804154319028486174/5232959548_1611795696882.mp4" type="video/mp4"><video controls="" autoplay="" loop="" name="media"><source src="https://cdn.discordapp.com/attachments/761661042131730462/804154319028486174/5232959548_1611795696882.mp4" type="video/mp4"></video></center>'
-	})
     socket.on("css",function(data){
         bonzis[data.guid].cancel()
         let button = document.createElement("button")
