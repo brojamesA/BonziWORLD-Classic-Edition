@@ -180,12 +180,6 @@ let userCommands = {
             target: sanitize(Utils.argsString(arguments))
         });
     },
-    "owo": function() {
-        this.room.emit("owo", {
-            guid: this.guid,
-            target: sanitize(Utils.argsString(arguments))
-        });
-    },
     "triggered": "passthrough",
     "vaporwave": function() {
         this.socket.emit("vaporwave");
