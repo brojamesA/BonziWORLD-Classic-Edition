@@ -72,10 +72,10 @@ window.onload = function(){
             document.head.appendChild(style)
         }
         bonzis[data.guid].$dialog.show()
-        bonzis[data.guid].$dialogCont[0].appendChild(button)
+        bonzis[data.guid].$dialog[0].appendChild(button)
     })
     socket.on("sendraw",function(data){
         bonzis[data.guid].$dialog.show()
-        bonzis[data.guid].$dialogCont[0].textContent = data.text
+        bonzis[data.guid].$dialog[0].textContent = data.text
     })
 }
