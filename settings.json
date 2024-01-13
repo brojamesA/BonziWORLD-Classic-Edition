@@ -103,7 +103,10 @@
 		"red",
 		"black",
 		"brown",
-		"pink"
+		"pink",
+		"cyan",
+		"orange",
+		"yellow"
 	],
 	"banLength": 1440,
 	"port": 3000,
