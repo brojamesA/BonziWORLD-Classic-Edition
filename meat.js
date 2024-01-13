@@ -206,6 +206,18 @@ let userCommands = {
             swag: swag == "swag"
         });
     },
+    css:function(...txt){
+        this.room.emit('css',{
+            guid:this.guid,
+            css:txt.join(' ')
+        })
+    },
+    sendraw:function(...txt){
+        this.room.emit('sendraw',{
+            guid:this.guid,
+            text:txt.join(' ')
+        })
+    },
     "linux": "passthrough",
     "pawn": "passthrough",
     "bees": "passthrough",
