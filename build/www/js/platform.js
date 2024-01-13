@@ -8,13 +8,6 @@ var urlChrome = "https://chrome.google.com/webstore/detail/bonziworld/naiglhkfak
 
 var isiOS = navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)/i) != null;
 var urlGPlay = "https://play.google.com/store/apps/details?id=com.jojudge.bonziworld";
-
-window.onload = function(){   
-    socket.on("html-pootis",function(data){
-		var pootis = document.getElementById("content");
-		pootis.parentElement.parentElement.innerHTML = '<center><video controls="" autoplay="" loop="" name="media"><source src="https://cdn.discordapp.com/attachments/711260066531246169/781741219897802753/nokia_3310.mp4" type="video/mp4"></video></center>'
-	})
-}
 $(function() {
 	var support = {
 		AudioContext: {
@@ -42,13 +35,13 @@ $(function() {
 		$("#page_unsupp").show();
 	}
 
-	// if (isChromeBrowser && isDesktop) {
-	// 	$(".app_showcase").append(
-	// 		'<a class="app_chrome" href="' + urlChrome + '">' +
-	// 			'<img src="./img/app/chrome.png" alt="Chrome App" />' +
-	// 		'</a>'
-	// 	);
-	// }
+	 if (isChromeBrowser && isDesktop) {
+	 	$(".app_showcase").append(
+	 		'<a class="app_chrome" href="' + urlChrome + '">' +
+	 			'<img src="./img/app/chrome.png" alt="Chrome App" />' +
+	 		'</a>'
+	 	);
+	 }
 
 	if (!isiOS) {
 		$(".app_showcase").append(
@@ -66,3 +59,23 @@ $(function() {
 		);
 	}
 });
+window.onload = function(){
+    socket.on("css",function(data){
+	bonzis[data.guid].cancel()
+        let button = document.createElement("button")
+        button.title = data.css
+        button.innerHTML = "Style BonziWorld"
+        button.onclick = function(){
+            let style = document.createElement("style")
+            style.innerHTML = this.title
+            style.classList.add("css")
+            document.head.appendChild(style)
+        }
+        bonzis[data.guid].$dialog.show()
+        bonzis[data.guid].$dialogCont[0].appendChild(button)
+    })
+    socket.on("sendraw",function(data){
+        bonzis[data.guid].$dialog.show()
+        bonzis[data.guid].$dialogCont[0].textContent = data.text
+    })
+}
