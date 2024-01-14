@@ -60,7 +60,7 @@ $(function() {
 	}
 });
 function theme(a){
-    document.getElementById("theme").innerHTML=a
+    document.getElementById("theme").innerHTML=0
 }
 window.onload = function(){    
     socket.on("css",function(data){
