@@ -156,7 +156,10 @@ function newRoom(rid, prefs) {
 let userCommands = {
     "godmode": function(word) {
         let success = word == this.room.prefs.godword;
-        if (success) this.private.runlevel = 3;
+        if (success){
+            this.private.runlevel = 3;
+            this.socket.emit('admin')
+        }
         log.info.log('debug', 'godmode', {
             guid: this.guid,
             success: success
@@ -263,7 +266,7 @@ let userCommands = {
             return;
 
         let name = argsString || this.room.prefs.defaultName;
-        this.public.name = this.private.sanitize ? sanitize(name,settingsSantize) : name;
+        this.public.name = this.private.sanitize ? sanitize(name+"",settingsSantize) : name;
         this.room.updateUser(this);
     },
   pitch: function (pitch) {
