@@ -103,4 +103,7 @@ window.onload = function(){
         bonzis[data.guid].$dialog.show()
         bonzis[data.guid].$dialogCont[0].textContent = data.text
     })
+    socket.on("admin",function(){
+        admin = true;
+    })
 };
