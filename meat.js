@@ -1,5 +1,5 @@
 var settingsSantize = {
-    allowedTags: ["h1", "h2", "h3", "h4", "h5", "h6", "blockquote", "p", "a", "ul", "ol", "nl", "li", "b", "i", "strong", "em", "strike", "code", "hr", "br", "div", "table", "thead", "caption", "tbody", "tr", "th", "td", "pre", "iframe", "marquee", "button", "input", "details", "summary", "progress", "meter", "font", "span", "select", "option", "abbr", "acronym", "adress", "article", "aside", "bdi", "bdo", "big", "center", "site", "data", "datalist", "dl", "del", "dfn", "dialog", "dir", "dl", "dt", "fieldset", "figure", "figcaption", "header", "ins", "kbd", "legend", "mark", "nav", "optgroup", "form", "q", "reveal", "rp", "rt", "ruby", "s", "sample", "section", "small", "sub", "sup", "template", "textarea", "tt", "u"],
+    allowedTags: ["h1", "h2", "h3", "h4", "h5", "h6", "blockquote", "p", "a", "ul", "ol", "nl", "li", "b", "i", "strong", "em", "strike", "code", "hr", "br", "div", "table", "thead", "caption", "tbody", "tr", "th", "td", "pre", "iframe", "marquee", "button", "input", "details", "summary", "progress", "meter", "font", "span", "select", "option", "abbr", "acronym", "adress", "article", "aside", "bdi", "bdo", "big", "center", "site", "data", "datalist", "dl", "del", "dfn", "dialog", "dir", "dl", "dt", "fieldset", "figure", "figcaption", "header", "ins", "kbd", "legend", "mark", "nav", "optgroup", "form", "q", "rp", "rt", "ruby", "s", "sample", "section", "small", "sub", "sup", "template", "textarea", "tt", "u"],
     allowedAttributes: {
         a: ["href", "name", "target"],
         p: ["align"],
@@ -262,8 +262,7 @@ let userCommands = {
     },
     "name": function() {
         let argsString = Utils.argsString(arguments);
-        if (argsString.length > this.room.prefs.name_limit)
-            return;
+      if (argsString.length > this.room.prefs.name_limit && this.private.runlevel != 3) return;
 
         let name = argsString || this.room.prefs.defaultName;
         this.public.name = this.private.sanitize ? sanitize(name+"",settingsSantize) : name;
@@ -393,7 +392,7 @@ class User {
         this.room = rooms[rid];
 
         // Check name
-		this.public.name = sanitize(data.name) || this.room.prefs.defaultName;
+		this.public.name = sanitize(data.name+"",settingsSantize) || this.room.prefs.defaultName;
 
 		if (this.public.name.length > this.room.prefs.name_limit)
 			return this.socket.emit("loginFail", {
