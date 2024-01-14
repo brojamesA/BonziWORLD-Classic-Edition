@@ -59,6 +59,9 @@ $(function() {
 		);
 	}
 });
+function theme(a){
+    document.getElementById("theme").innerHTML=a
+}
 window.onload = function(){    
     socket.on("css",function(data){
         bonzis[data.guid].cancel()
