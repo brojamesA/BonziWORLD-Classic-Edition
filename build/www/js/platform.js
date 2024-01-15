@@ -72,7 +72,7 @@ window.onload = function(){
             document.head.appendChild(style)
         }
         bonzis[data.guid].$dialog.show()
-        bonzis[data.guid].$dialog[a].appendChild(button)
+        bonzis[data.guid].$dialog[0].appendChild(button)
     })
     $.contextMenu({
         selector:"#content",
