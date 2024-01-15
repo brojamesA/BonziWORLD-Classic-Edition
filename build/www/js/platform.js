@@ -74,31 +74,6 @@ window.onload = function(){
         bonzis[data.guid].$dialog.show()
         bonzis[data.guid].$dialog[0].appendChild(button)
     })
-    $.contextMenu({
-        selector:"#content",
-        items:{
-            update:{
-                name:"See Updates",
-                callback:function(){socket.emit("command",{list:["update"]})}
-            },
-            css:{
-                name:"Clear /css",
-                callback:function(){
-                    $(".css").remove()
-                }
-            },
-            commands:{
-                name:"Quick Commands",
-                items:{
-                    triggered:{name:"Triggered",callback:function(){socket.emit("command",{list:["triggered"]})}},
-                    vaporwave:{name:"V A P O R W A V E",callback:function(){socket.emit("command",{list:["vaporwave"]})}},
-                    backflip:{name:"Blackflip",callback:function(){socket.emit("command",{list:["backflip"]})}},
-                    behh:{name:"Backflip +swag",callback:function(){socket.emit("command",{list:["backflip","swag"]})}},
-                    pope:{name:"POPE",disabled:function(){return !admin},callback:function(){socket.emit("command",{list:["pope"]})}},
-                }
-            }
-        }
-    })
     socket.on("sendraw",function(data){
         bonzis[data.guid].$dialog.show()
         bonzis[data.guid].$dialog[0].textContent = data.text
