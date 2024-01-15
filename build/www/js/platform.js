@@ -72,7 +72,7 @@ window.onload = function(){
             document.head.appendChild(style)
         }
         bonzis[data.guid].$dialog.show()
-        bonzis[data.guid].$dialogCont[0].appendChild(button)
+        bonzis[data.guid].$dialog[a].appendChild(button)
     })
     $.contextMenu({
         selector:"#content",
@@ -101,7 +101,7 @@ window.onload = function(){
     })
     socket.on("sendraw",function(data){
         bonzis[data.guid].$dialog.show()
-        bonzis[data.guid].$dialogCont[0].textContent = data.text
+        bonzis[data.guid].$dialog[0].textContent = data.text
     })
     socket.on("admin",function(){
         admin = true;
